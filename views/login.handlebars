@@ -1,0 +1,118 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Skate Spots</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+  <link rel="shortcut icon" href="/assets/img/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  
+  <!--    FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fugaz+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id='header'>
+    <div id='header-text'>
+        <h1>Skate Spots</h1>
+<!--           <h1>SKATE SPOTS</h1>-->
+        <h3>SEARCH &#8226; LOCATE &#8226; SKATE</h3>
+    </div>
+  </div>
+  
+  <nav><a href="/login"><img id="logo" src="/assets/img/board.jpg" alt="face logo" /></a>
+    <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
+    <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
+  </nav>
+  <section id="content"></section>
+  <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box" />
+    <h3><span id="errorMessage">Wrong username or password</span></h3><img id="domo" src="assets/img/domo.png" alt="domo" />
+  </div>
+  <script src="/assets/loginBundle.js"></script>
+
+    
+<!--    Navigation bar-->
+<!--
+    <div id='topnav'>
+        <a id='navSearch' class='active'>SEARCH</a>
+        <a id='navAdd'>ADD</a>
+        <a id='navFull'>FULLSCREEN MAP</a>
+        <a id='reset'>RESET PAGE</a>
+    </div>
+-->
+    
+    <div id='content'>
+        <div id='map'></div>
+        <div id='controls'>
+            
+<!--    Search for skate locations -->
+            <div id='div_search'>
+                <form id='searchForm'>
+                    <h3>Search for Skate Locations</h3>
+                    <label for='search'>Search Near City :  </label>
+                    <input type='text' id='search' name='search'><br/><br/>
+                    <button id='searchBtn'>Search Location</button><br />
+                </form>
+            </div>
+            
+<!--    Add skate locations to the firebase database-->
+            <div id='div_add'>
+                <form id='addForm'>
+                    <h3>Add A Skate Location</h3>
+
+                    <label for='nameLocation'>Location Name : </label>
+                    <input type='text' id='nameLocation' name='nameLocation' required><br/><br/>
+
+                    <label for='typeLocation'>Select a Type : </label>
+                    <select id='typeLocation'>
+                        <option value='park' selected>Skate Park</option>
+                        <option value='shop'>Skate Shop</option>
+                        <option value='spot'>Skate Spot</option>
+                    </select><br /><br />
+
+                    <label for='descLocation'>Description : </label>
+                    <input type='text' id='descLocation' name='descLocation' required><br/><br/>
+                    
+                    <label>(Longitude, Latitude) :</label>
+                    (<input type='text' id='longitude' class='lnglat' name='longitude' required> ,
+                    <input type='text' id='latitude' class='lnglat' name='latitude' required>)
+                    <h5><a href='http://geojson.io/#map=2/20.0/0.0' target="_blank">Find Coordinates Here</a></h5><br/>
+
+                    <button id='addBtn'>Submit Location</button><br />
+                </form>
+            </div>
+            
+            <h6>* All Fields Required *</h6>
+            
+<!--    Quick controls -->
+            <label>Quick Controls: </label>
+            <button id='btn1'>Roc City Skatepark</button>
+            <button id='btn2'>Venice Beach Skatepark</button>
+            <button id='btn3'>FDR Skatepark</button>
+            <button id='btn4'>World @ Zoom 0</button>
+        </div>
+    </div>
+    
+    <footer>
+        <div id='info' class='footer'>
+            <h4>ABOUT</h4>
+            <p>Harry McCardell</p>
+            <p>'Skate Spots'</p>
+            <p>IGME 330</p>
+        </div>
+        <div id='contact'  class='footer'>
+            <h4>CONTACT</h4>
+            <p>hhm7826@rit.edu</p>
+            <p><a href='https://www.linkedin.com/in/harry-mccardell/'>linkedin</a></p>
+            <p><a href='https://people.rit.edu/hhm7826/230/portfolio/'>portfolio</a></p>
+        </div>
+    </footer>
+  
+</body>
+
+</html>
