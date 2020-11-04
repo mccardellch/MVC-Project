@@ -1,70 +1,72 @@
-const handleDomo = (e) => {
+const handleLocation = (e) => {
   e.preventDefault();
   
-  $("#domoMessage").animate({width:'hide'}, 350);
+  $("#screenMessage").animate({width:'hide'}, 350);
   
-  if($("#domoName").val() == '' || $("#domoAge").val() == '') {
+  if($("#locName").val() == '' || $("#loctype").val() == '') || $("#longitude").val() == '' || $("#latitude").val() == '') {
     handleError("RAWR! All fields are required");
     return false;
   }
   
-  sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function() {
-    loadDomosFromServer();
+  sendAjax('POST', $("#addForm").attr("action"), $("#addForm").serialize(), function() {
+    loadLocsFromServer();
   });
   
   return false;
 };
 
-const DomoForm = (props) => {
+const AddForm = (props) => {
   return (
-  <form id="domoForm" 
-    name="domoForm" 
-    onSubmit={handleDomo} 
-    action="/maker" 
+  <form id="addForm" 
+    name="addForm" 
+    onSubmit={handleLocation} 
+    action="/add" 
     method="POST" 
-    className="domoForm"
+    className="addForm"
     >
     <label htmlFor="name">Name: </label>
-    <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-    <label htmlFor="Age">Age: </label>
-    <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
-    <label htmlFor="Level">Level: </label>
-    <input id="domoLevel" type="text" name="level" placeholder="Domo Level"/>
+    <input id="locName" type="text" name="name" placeholder="Location Name"/>
+    <label htmlFor="type">Type: </label>
+    <input id="locType" type="text" name="type" placeholder="Location Type"/>
+    <label htmlFor="coords">Coordinates :</label>
+      
+    ( <input type='text' id='longitude' class='lnglat' name='longitude' required /> ,
+    <input type='text' id='latitude' class='lnglat' name='latitude' required /> )
+      
     <input type="hidden" name="_csrf" value={props.csrf} />
-    <input className="makeDomoSubmit" type="submit" value="Make Domo" />   
+    <input className="makeLocSubmit" type="submit" value="Make Location" />   
   </form>
   );
 };
 
-const DomoList = function(props) {
+const LocationList = function(props) {
   if (props.domos.length === 0){
     return (
-      <div className="domoList">
-        <h3 className="emptyDomo">No Domos yet</h3>
+      <div className="LocationList">
+        <h3 className="emptyLocation">No Locations yet</h3>
       </div>
     );
   }
   
-  const domoNodes = props.domos.map(function(domo) {
+  const locNodes = props.domos.map(function(loc) {
     return (
       <div key={domo._id} className="domo">
-        <img src="/assets/img/domoFace.jpeg" alt="domo face" className="domoFace" />
-        <h3 className="domoName">Name: {domo.name} </h3>
-        <h3 className="domoAge">Age: {domo.age} </h3>
-        <h3 className="domoLevel">Level: {domo.level} </h3>
+        <img src="/assets/img/board.jpeg" alt="DEFAULT" className="board" />
+        <h3 className="locName">Name: {loc.name} </h3>
+        <h3 className="locType">Type: {loc.Type} </h3>
       </div>
     );
   });
   
   return (
-    <div className="domoList">
+    <div className="LocationList">
       {domoNodes}
     </div> 
   );
 };
 
-const loadDomosFromServer = () => {
-  sendAjax('GET', '/getDomos', null, (data) => {
+const loadLocsFromServer = () => {
+  sendAjax('GET', '/getLocation', null, (data) => {
     ReactDOM.render(
       <DomoList domos={data.domos} />, document.querySelector("#domos")
     );
@@ -73,14 +75,14 @@ const loadDomosFromServer = () => {
 
 const setup = function(csrf) {
   ReactDOM.render(
-    <DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
+    <AddForm csrf={csrf} />, document.querySelector("#makeDomo")
   );
   
   ReactDOM.render(
-    <DomoList domos={[]} />, document.querySelector("#domos")
+    <LocationList domos={[]} />, document.querySelector("#domos")
   );
   
-  loadDomosFromServer();
+  loadLocsFromServer();
 };
 
 const getToken = () => {

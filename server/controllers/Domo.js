@@ -32,7 +32,7 @@ const makeDomo = (req, res) => {
 
   const domoPromise = newDomo.save();
 
-  domoPromise.then(() => res.json({ redirect: '/maker' }));
+  domoPromise.then(() => res.json({ redirect: '/add' }));
 
   domoPromise.catch((err) => {
     console.log(err);

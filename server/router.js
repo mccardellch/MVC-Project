@@ -6,7 +6,7 @@ const mid = require('./middleware');
 // setup routes
 const router = (app) => {
   app.get('/getToken', mid.requiresSecure, controllers.Account.getToken);
-//  app.get('/getDomos', mid.requiresLogin, controllers.Domo.getDomos);
+  app.get('/getLocation', mid.requiresLogin, controllers.Location.getLocation);
 
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
@@ -15,6 +15,12 @@ const router = (app) => {
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
+  app.get('/search', mid.requiresLogin, controllers.Location.searchPage);
+//  app.post('/search', mid.requiresLogin, controllers.Location.searchPage);
+  
+  app.get('/add', mid.requiresLogin, controllers.Location.addPage);
+  app.post('/add', mid.requiresLogin, controllers.Location.add);
+  
   app.get('/settings', mid.requiresLogin, controllers.Account.settings);
 
 //  app.get('/maker', mid.requiresLogin, controllers.Domo.makerPage);
