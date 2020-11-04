@@ -97,7 +97,7 @@ const setup = (csrf) => {
 };
 
 // We need to make requests to get new CSRF tokens from the server. 
-// This will allow us to reach out and get new tokens whenn eeded.
+// This will allow us to reach out and get new tokens when needed.
 const getToken = () => {
   sendAjax('GET', '/getToken', null, (result) => {
     setup(result.csrfToken);

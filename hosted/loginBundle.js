@@ -2,7 +2,7 @@
 
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
-  $("#domoMessage").animate({
+  $("#screenMessage").animate({
     width: 'hide'
   }, 350);
 
@@ -18,7 +18,7 @@ var handleLogin = function handleLogin(e) {
 
 var handleSignup = function handleSignup(e) {
   e.preventDefault();
-  $("#domoMessage").animate({
+  $("#screenMessage").animate({
     width: 'hide'
   }, 350);
 
@@ -136,7 +136,7 @@ var setup = function setup(csrf) {
   });
   createLoginWindow(csrf); //default view
 }; // We need to make requests to get new CSRF tokens from the server. 
-// This will allow us to reach out and get new tokens whenn eeded.
+// This will allow us to reach out and get new tokens when needed.
 
 
 var getToken = function getToken() {
@@ -152,13 +152,13 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#domoMessage").animate({
+  $("#screenMessage").animate({
     width: 'toggle'
   }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#domoMessage").animate({
+  $("#screenMessage").animate({
     width: 'hide'
   }, 350);
   window.location = response.redirect;

@@ -50,9 +50,19 @@ LocationSchema.statics.toAPI = (doc) => ({
   latitude: doc.latitude,
 });
 
+//find locations created by the owner
 LocationSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     owner: convertId(ownerId),
+  };
+
+  return LocationModel.find(search).select('name type longitude latitude').lean().exec(callback);
+};
+
+//find locations by the type 
+LocationSchema.statics.findByType = (type, callback) => {
+  const search = {
+    type: type,
   };
 
   return LocationModel.find(search).select('name type longitude latitude').lean().exec(callback);

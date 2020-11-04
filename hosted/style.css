@@ -49,32 +49,32 @@ nav:nth-child(1) {
 
 .addForm {
     border: 2px solid #338acc;
-    height: 35px;
-    width: 900px;
+/*    height: 35px;*/
+/*    width: 900px;*/
     margin-top:0px;
     padding-top:10px;
     background-color: #55acee;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
+/*    border-bottom-right-radius: 4px;*/
+/*    border-top-right-radius: 4px;*/
 }
 
 .addForm label {
-    display: inline-block;
+    display: block;
     width: 75px;
     margin-left: 10px;
     font-size: 1.2em;
-    float: left;
+/*    float: left;*/
     color: white;
 }
 
 .addForm input[type=text] {
-    float:left;
+/*    float:left;*/
 }
 
 .makeLocSubmit {
-    transition: background-color 0.4s ease;
+    transition: background-color 0.2s ease;
     display: inline;
-    width: 90px;
+    width: 110px;
     background-color: #55acee;
     border-radius: 2px;
     color: white;
@@ -86,7 +86,7 @@ nav:nth-child(1) {
 }
 
 .makeLocSubmit:hover {
-    transition: background-color 0.4s ease;
+    transition: background-color 0.2s ease;
     background-color: #338acc;
 }
 
@@ -178,7 +178,7 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#domo {
+#board {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
@@ -189,7 +189,7 @@ nav:nth-child(1) {
     transform: rotate(330deg);
 }
 
-#domos {
+#location {
     width: 40%;
     min-width: 400px;
     border: 2px solid #55acee;
@@ -198,7 +198,7 @@ nav:nth-child(1) {
     margin-top: 100px;
 }
 
-.domo {
+.location {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
@@ -211,7 +211,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-.domo:hover {
+.location:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255,255,255, 0.8);
     transition: background-color 2.6s ease-out;
@@ -253,11 +253,11 @@ h3.locAge {
     font-size: 1.5em;
 }
 
-.domo:first-child {
+.location:first-child {
     margin-top: 10px;
 }
 
-.domo:last-child {
+.location:last-child {
     margin-bottom:10px;
 }
 

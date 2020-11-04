@@ -3,7 +3,7 @@ const handleLocation = (e) => {
   
   $("#screenMessage").animate({width:'hide'}, 350);
   
-  if($("#locName").val() == '' || $("#loctype").val() == '') || $("#longitude").val() == '' || $("#latitude").val() == '') {
+  if($("#locName").val() == '' || $("#loctype").val() == '' || $("#longitude").val() == '' || $("#latitude").val() == '') {
     handleError("RAWR! All fields are required");
     return false;
   }
@@ -17,6 +17,7 @@ const handleLocation = (e) => {
 
 const AddForm = (props) => {
   return (
+    
   <form id="addForm" 
     name="addForm" 
     onSubmit={handleLocation} 
@@ -24,23 +25,30 @@ const AddForm = (props) => {
     method="POST" 
     className="addForm"
     >
+    <h3>Add A Skate Location</h3>  
+
     <label htmlFor="name">Name: </label>
     <input id="locName" type="text" name="name" placeholder="Location Name"/>
-    <label htmlFor="type">Type: </label>
-    <input id="locType" type="text" name="type" placeholder="Location Type"/>
-    <label htmlFor="coords">Coordinates :</label>
       
-    ( <input type='text' id='longitude' class='lnglat' name='longitude' required /> ,
-    <input type='text' id='latitude' class='lnglat' name='latitude' required /> )
+     <label htmlFor="type">Type: </label>
+    <select id="locType" name="type" >
+      <option value='park' defaultValue>Skate Park</option>
+      <option value='shop'>Skate Shop</option>
+      <option value='spot'>Skate Spot</option>
+    </select><br /><br />
+
+    <label htmlFor="coords">Coordinates: </label>      
+    ( <input type='text' id='long' className='lnglat' name='long' required /> ,
+    <input type='text' id='lat' className='lnglat' name='lat' required /> )
       
-    <input type="hidden" name="_csrf" value={props.csrf} />
+    <input type="hidden" name="_csrf" value={props.csrf} /> <br/><br/>
     <input className="makeLocSubmit" type="submit" value="Make Location" />   
   </form>
   );
 };
 
 const LocationList = function(props) {
-  if (props.domos.length === 0){
+  if (props.locations.length === 0){
     return (
       <div className="LocationList">
         <h3 className="emptyLocation">No Locations yet</h3>
@@ -48,38 +56,57 @@ const LocationList = function(props) {
     );
   }
   
-  const locNodes = props.domos.map(function(loc) {
+  const locNodes = props.locations.map(function(loc) {     
+    
+        
+    var image = "";
+    switch (loc.type) {
+      case "park":
+        image = "/assets/img/park-icon.png";
+        break;
+      case "shop":
+        image = "/assets/img/shop-icon.png";
+        break;
+      case "spot":
+        image = "/assets/img/spot-icon.png";
+        break;
+      default:
+        image = "/assets/img/board.jpg";
+        break;
+    }
+    
     return (
-      <div key={domo._id} className="domo">
-        <img src="/assets/img/board.jpeg" alt="DEFAULT" className="board" />
+      <div key={locations._id} className="location">
+        <img src="/assets/img/board.jpg" alt="DEFAULT" className="board" />
         <h3 className="locName">Name: {loc.name} </h3>
-        <h3 className="locType">Type: {loc.Type} </h3>
+        <h3 className="locType">Type: {loc.type} </h3>
+        <h3 className="locCoords">Coordinates: ({loc.longitude}, {loc.latitude})</h3>
       </div>
     );
   });
   
   return (
     <div className="LocationList">
-      {domoNodes}
+      {locNodes}
     </div> 
   );
 };
 
 const loadLocsFromServer = () => {
-  sendAjax('GET', '/getLocation', null, (data) => {
+  sendAjax('GET', '/getMyLocations', null, (data) => {
     ReactDOM.render(
-      <DomoList domos={data.domos} />, document.querySelector("#domos")
+      <LocationList locations={data.locations} />, document.querySelector("#locations")
     );
   });
 };
 
 const setup = function(csrf) {
   ReactDOM.render(
-    <AddForm csrf={csrf} />, document.querySelector("#makeDomo")
+    <AddForm csrf={csrf} />, document.querySelector("#controls")
   );
   
   ReactDOM.render(
-    <LocationList domos={[]} />, document.querySelector("#domos")
+    <LocationList locations={[]} />, document.querySelector("#locations")
   );
   
   loadLocsFromServer();

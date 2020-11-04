@@ -1,22 +1,93 @@
 // controller
 const models = require('../models');
 
-const { Location } = models;
+const {
+  Location
+} = models;
 
-const getLocation = (req, res) => {
-  console.log('get locations')
-}
-
-const search = (req, res) => res.render('app');
-const add = (req, res) => res.render('app');
-
-
-// create a new location
+// add a new location
 const addLocation = (req, res) => {
-  console.log('add location');
+  if (!req.body.name || !req.body.type || !req.body.long || !req.body.lat) {
+    return res.status(400).json({
+      error: 'All fields are required.'
+    });
+  }
+
+  const locData = {
+    name: req.body.name,
+    type: req.body.type,
+    longitude: req.body.long,
+    latitude: req.body.lat,
+    owner: req.session.account._id,
+  };
+
+  const newLocation = new Location.LocationModel(locData);
+
+  const locationPromise = newLocation.save();
+
+  locationPromise.then(() => res.json({
+    redirect: '/add'
+  }));
+
+  locationPromise.catch((err) => {
+    console.log(err);
+    if (err.code === 11000) {
+      return res.status(400).json({
+        error: 'This location already exists.'
+      });
+    }
+
+    return res.status(400).json({
+      error: 'An error occured.'
+    });
+  });
+
+  return locationPromise;
+};
+
+// render and return locations
+const myLocations = (req, res) => {
+  // grab all the Locations for a particular user and pass it to the view
+  Location.LocationModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        error: 'An error occured.'
+      });
+    }
+
+    return res.render('app', {
+      csrfToken: req.csrfToken(),
+      locations: docs
+    });
+  });
 }
 
-module.exports.getLocation = getLocation;
-module.exports.searchPage = search;
-module.exports.addPage = add;
+// return just locations
+const getMyLocations = (request, response) => {
+  const req = request;
+  const res = response;
+
+  return Location.LocationModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        error: 'An error occurred'
+      });
+    }
+
+    return res.json({
+      locations: docs
+    });
+  });
+}
+
+const searchPage = (req, res) => res.render('app');
+
+const addPage = (req, res) => res.render('app');
+
+module.exports.myLocations = myLocations;
+module.exports.getMyLocations = getMyLocations;
+module.exports.searchPage = searchPage;
+module.exports.addPage = addPage;
 module.exports.add = addLocation;
