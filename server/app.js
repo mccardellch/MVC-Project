@@ -28,7 +28,7 @@ const mongooseOptions = {
 
 mongoose.connect(dbURL, mongooseOptions, (err) => {
   if (err) {
-    console.log('Could not connect to database');
+    //    console.log('Could not connect to database');
     throw err;
   }
 });
@@ -86,7 +86,7 @@ app.use(csrf());
 app.use((err, req, res, next) => {
   if (err.code !== 'EBADCSRFTOKEN') return next(err);
 
-  console.log('Missing CSRF token');
+  //  console.log('Missing CSRF token');
   return false;
 });
 
@@ -96,5 +96,5 @@ app.listen(port, (err) => {
   if (err) {
     throw err;
   }
-  console.log(`Listening on port ${port}`);
+//  console.log(`Listening on port ${port}`);
 });

@@ -2,14 +2,14 @@
 const models = require('../models');
 
 const {
-  Location
+  Location,
 } = models;
 
 // add a new location
 const addLocation = (req, res) => {
   if (!req.body.name || !req.body.type || !req.body.long || !req.body.lat) {
     return res.status(400).json({
-      error: 'All fields are required.'
+      error: 'All fields are required.',
     });
   }
 
@@ -26,19 +26,19 @@ const addLocation = (req, res) => {
   const locationPromise = newLocation.save();
 
   locationPromise.then(() => res.json({
-    redirect: '/add'
+    redirect: '/add',
   }));
 
   locationPromise.catch((err) => {
-    console.log(err);
+    //    console.log(err);
     if (err.code === 11000) {
       return res.status(400).json({
-        error: 'This location already exists.'
+        error: 'This location already exists.',
       });
     }
 
     return res.status(400).json({
-      error: 'An error occured.'
+      error: 'An error occured.',
     });
   });
 
@@ -50,18 +50,18 @@ const myLocations = (req, res) => {
   // grab all the Locations for a particular user and pass it to the view
   Location.LocationModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
-      console.log(err);
+      //      console.log(err);
       return res.status(400).json({
-        error: 'An error occured.'
+        error: 'An error occured.',
       });
     }
 
     return res.render('app', {
       csrfToken: req.csrfToken(),
-      locations: docs
+      locations: docs,
     });
   });
-}
+};
 
 // return just locations
 const getMyLocations = (request, response) => {
@@ -70,17 +70,17 @@ const getMyLocations = (request, response) => {
 
   return Location.LocationModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
-      console.log(err);
+      //      console.log(err);
       return res.status(400).json({
-        error: 'An error occurred'
+        error: 'An error occurred',
       });
     }
 
     return res.json({
-      locations: docs
+      locations: docs,
     });
   });
-}
+};
 
 const searchPage = (req, res) => res.render('app');
 

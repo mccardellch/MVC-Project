@@ -17,11 +17,11 @@ const router = (app) => {
 
   app.get('/search', mid.requiresLogin, controllers.Location.searchPage);
   app.post('/search', mid.requiresLogin, controllers.Location.searchPage);
-  
+
   app.get('/myLocations', mid.requiresLogin, controllers.Location.myLocations);
   app.get('/add', mid.requiresLogin, controllers.Location.addPage);
   app.post('/add', mid.requiresLogin, controllers.Location.add);
-  
+
   app.get('/settings', mid.requiresLogin, controllers.Account.settings);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
