@@ -2,12 +2,10 @@
 
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
-  $("#screenMessage").animate({
-    width: 'hide'
-  }, 350);
+  $("#screenMessage").show();
 
   if ($("#user").val() == '' || $("#pass").val() == '') {
-    handleError("RAWR! Username or password is empty");
+    handleError("Username or password is empty");
     return false;
   }
 
@@ -20,15 +18,15 @@ var handleSignup = function handleSignup(e) {
   e.preventDefault();
   $("#screenMessage").animate({
     width: 'hide'
-  }, 350);
+  });
 
   if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required");
     return false;
   }
 
   if ($("#pass").val() !== $("#pass2").val()) {
-    handleError("RAWR! Passwords do not match");
+    handleError("Passwords do not match");
     return false;
   }
 
@@ -152,9 +150,7 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#screenMessage").animate({
-    width: 'toggle'
-  }, 350);
+  $("#screenMessage").show();
 };
 
 var redirect = function redirect(response) {

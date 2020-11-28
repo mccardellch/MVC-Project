@@ -1,10 +1,10 @@
 const handleLocation = (e) => {
   e.preventDefault();
   
-  $("#screenMessage").animate({width:'hide'}, 350);
+//  $("#screenMessage").animate({width:'hide'}, 350);
   
   if($("#locName").val() == '' || $("#loctype").val() == '' || $("#longitude").val() == '' || $("#latitude").val() == '') {
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required");
     return false;
   }
   

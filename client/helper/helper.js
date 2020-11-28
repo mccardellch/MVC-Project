@@ -1,6 +1,6 @@
 const handleError = (message) => {
   $("#errorMessage").text(message);
-  $("#screenMessage").animate({width:'toggle'}, 350);
+  $("#screenMessage").show();
 };
 
 const redirect = (response) => {

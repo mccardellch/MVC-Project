@@ -1,13 +1,10 @@
 "use strict";
 
 var handleLocation = function handleLocation(e) {
-  e.preventDefault();
-  $("#screenMessage").animate({
-    width: 'hide'
-  }, 350);
+  e.preventDefault(); //  $("#screenMessage").animate({width:'hide'}, 350);
 
   if ($("#locName").val() == '' || $("#loctype").val() == '' || $("#longitude").val() == '' || $("#latitude").val() == '') {
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required");
     return false;
   }
 
@@ -149,16 +146,11 @@ $(document).ready(function () {
 "use strict";
 
 var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
-  $("#screenMessage").animate({
-    width: 'toggle'
-  }, 350);
+  $("#errorMessage").text(message); //  $("#screenMessage").animate({width:'toggle'}, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#screenMessage").animate({
-    width: 'hide'
-  }, 350);
+  //  $("#screenMessage").animate({width:'hide'}, 350);
   window.location = response.redirect;
 };
 
