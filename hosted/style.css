@@ -48,12 +48,10 @@ nav:nth-child(1) {
 }
 
 .addForm {
-    border: 2px solid #338acc;
 /*    height: 35px;*/
 /*    width: 900px;*/
-    margin-top:0px;
+    margin-top:0;
     padding-top:10px;
-    background-color: #55acee;
 /*    border-bottom-right-radius: 4px;*/
 /*    border-top-right-radius: 4px;*/
 }
@@ -64,7 +62,7 @@ nav:nth-child(1) {
     margin-left: 10px;
     font-size: 1.2em;
 /*    float: left;*/
-    color: white;
+/*    color: white;*/
 }
 
 .addForm input[type=text] {
@@ -224,14 +222,17 @@ img.board {
     float:left;
 }
 
-h3.emptyLocation {
-    width: 400px;
-    font-size: 1.5em;
+#content h3 {
     margin: 0 auto;
     text-align: center;
-    margin-top: 18px;
+    margin-top: 18px;  
 }
 
+h3.emptyLocation {
+/*    font-size: 1.2em;*/
+
+}
+/*
 h3.locName {
     float:left;
     width: 200px;
@@ -240,13 +241,19 @@ h3.locName {
     font-size: 1.5em;
 }
 
-h3.locAge {
+h3.locType {
     float:right;
     text-align: left;
-    width: 100px;
+    width: 200px;
     font-weight: bold;
     padding-right: 40px;
     font-size: 1.5em;
+}
+*/
+
+#locName, #locAbout, #locLocation, #locType   {
+  width: 200px;
+  margin-bottom: 10px;
 }
 
 .location:first-child {
@@ -365,9 +372,11 @@ body {
 /*map and controls*/
 #content{
 /*    margin-top: 75px;*/
-    width: 100%;
-    height: 400px;
-    display: table;
+  width: 100%;
+  text-align: center;
+/*  margin-left: 25%;*/
+  height: 400px;
+  display: table;
 }
 
 #mainForm {
@@ -375,47 +384,39 @@ body {
   height: 400px;
 }
 
-#map {
-    border: 3px solid black;
-    width: 750px;
-    height: 750px;
-    float:left;
+#locations {
+  border: 3px solid black;
+  width: 500px;
+  height: 550px;
+  display: inherit;
+  /*
     margin-left: 13%;
     margin-right: 20px;
     margin-bottom: 20px;
+*/
 }
 
-#controls{
-    border: 3px solid black;
-    display: inherit;
-    padding: 25px 20px 25px 25px;
-    margin-left: 22.5%;
-    height: 704px;
-    width: 500px;
+#controls {
+  border: 3px solid black;
+  float:left;
+  width: 500px;
+  height: 550px;
 }
 
-/*#div_add{display:none;}*/
-
-#controls h3 {margin: 0; padding-bottom: 15px;}
-
-.lnglat{
-    width: 80px;
+#content div {
+  margin: 5px;
 }
 
-#controls button{
+#controls button {
     margin-bottom: 5px;
 }
 
-button{
+button {
     font-size: 1em;
     display: block;
 }
 
 button:hover{background-color: lightblue;}
-
-#controls label{
-    font-size: 1.2em;
-}
 
 .park{
     background-image: url('../images/park-icon.png');

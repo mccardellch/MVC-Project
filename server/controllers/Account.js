@@ -97,8 +97,8 @@ const getToken = (request, response) => {
 };
 
 module.exports.loginPage = loginPage;
-module.exports.login = login;
 module.exports.logout = logout;
+module.exports.login = login;
 module.exports.signup = signup;
 module.exports.settings = settingsPage;
 module.exports.getToken = getToken;

@@ -3,7 +3,9 @@ const handleLocation = (e) => {
   
 //  $("#screenMessage").animate({width:'hide'}, 350);
   
-  if($("#locName").val() == '' || $("#loctype").val() == '' || $("#longitude").val() == '' || $("#latitude").val() == '') {
+  if($("#locName").val() == '' || $("#locType").val() == '' || $("#locLocation").val() == '' || $("#locAbout").val() == '') {
+    
+    console.log("location error");
     handleError("All fields are required");
     return false;
   }
@@ -27,19 +29,20 @@ const AddForm = (props) => {
     >
     <h3>Add A Skate Location</h3>  
 
-    <label htmlFor="name">Name: </label>
-    <input id="locName" type="text" name="name" placeholder="Location Name"/>
+    <label htmlFor="name">Name: </label><input id="locName" type="text" name="name" placeholder="Location Name"/>
       
-     <label htmlFor="type">Type: </label>
+    <label htmlFor="type">Type: </label>
     <select id="locType" name="type" >
-      <option value='park' defaultValue>Skate Park</option>
       <option value='shop'>Skate Shop</option>
+      <option value='park'>Skate Park</option>
       <option value='spot'>Skate Spot</option>
-    </select><br /><br />
+    </select><br />
 
-    <label htmlFor="coords">Coordinates: </label>      
-    ( <input type='text' id='long' className='lnglat' name='long' required /> ,
-    <input type='text' id='lat' className='lnglat' name='lat' required /> )
+    <label htmlFor="location">Location: </label>      
+    <input type='text' id='locLocation' name='location' required />
+      
+    <label htmlFor="About">about: </label>      
+    <input type='text' id='locAbout' name='about' required />
       
     <input type="hidden" name="_csrf" value={props.csrf} /> <br/><br/>
     <input className="makeLocSubmit" type="submit" value="Make Location" />   
@@ -56,18 +59,16 @@ const LocationList = function(props) {
     );
   }
   
-  const locNodes = props.locations.map(function(loc) {     
-    
-        
+const locNodes = props.locations.map(function(loc) {     
     var image = "";
     switch (loc.type) {
-      case "park":
+      case 'park':
         image = "/assets/img/park-icon.png";
         break;
-      case "shop":
+      case 'shop':
         image = "/assets/img/shop-icon.png";
         break;
-      case "spot":
+      case 'spot':
         image = "/assets/img/spot-icon.png";
         break;
       default:
@@ -77,10 +78,11 @@ const LocationList = function(props) {
     
     return (
       <div key={locations._id} className="location">
-        <img src="/assets/img/board.jpg" alt="DEFAULT" className="board" />
+        <img src={image} alt="icon" className="board" />
         <h3 className="locName">Name: {loc.name} </h3>
         <h3 className="locType">Type: {loc.type} </h3>
-        <h3 className="locCoords">Coordinates: ({loc.longitude}, {loc.latitude})</h3>
+        <h3 className="locLocation">Location: {loc.location}</h3>
+        <p className="locDescription">Description: {loc.description}</p>
       </div>
     );
   });

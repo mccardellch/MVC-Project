@@ -3,7 +3,8 @@
 var handleLocation = function handleLocation(e) {
   e.preventDefault(); //  $("#screenMessage").animate({width:'hide'}, 350);
 
-  if ($("#locName").val() == '' || $("#loctype").val() == '' || $("#longitude").val() == '' || $("#latitude").val() == '') {
+  if ($("#locName").val() == '' || $("#locType").val() == '' || $("#locLocation").val() == '' || $("#locAbout").val() == '') {
+    console.log("location error");
     handleError("All fields are required");
     return false;
   }
@@ -35,27 +36,26 @@ var AddForm = function AddForm(props) {
     id: "locType",
     name: "type"
   }, /*#__PURE__*/React.createElement("option", {
-    value: "park",
-    defaultValue: true
-  }, "Skate Park"), /*#__PURE__*/React.createElement("option", {
     value: "shop"
   }, "Skate Shop"), /*#__PURE__*/React.createElement("option", {
+    value: "park"
+  }, "Skate Park"), /*#__PURE__*/React.createElement("option", {
     value: "spot"
-  }, "Skate Spot")), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "coords"
-  }, "Coordinates: "), "( ", /*#__PURE__*/React.createElement("input", {
+  }, "Skate Spot")), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "location"
+  }, "Location: "), /*#__PURE__*/React.createElement("input", {
     type: "text",
-    id: "long",
-    className: "lnglat",
-    name: "long",
+    id: "locLocation",
+    name: "location",
     required: true
-  }), " ,", /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "About"
+  }, "about: "), /*#__PURE__*/React.createElement("input", {
     type: "text",
-    id: "lat",
-    className: "lnglat",
-    name: "lat",
+    id: "locAbout",
+    name: "about",
     required: true
-  }), " )", /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
@@ -79,15 +79,15 @@ var LocationList = function LocationList(props) {
     var image = "";
 
     switch (loc.type) {
-      case "park":
+      case 'park':
         image = "/assets/img/park-icon.png";
         break;
 
-      case "shop":
+      case 'shop':
         image = "/assets/img/shop-icon.png";
         break;
 
-      case "spot":
+      case 'spot':
         image = "/assets/img/spot-icon.png";
         break;
 
@@ -100,16 +100,18 @@ var LocationList = function LocationList(props) {
       key: locations._id,
       className: "location"
     }, /*#__PURE__*/React.createElement("img", {
-      src: "/assets/img/board.jpg",
-      alt: "DEFAULT",
+      src: image,
+      alt: "icon",
       className: "board"
     }), /*#__PURE__*/React.createElement("h3", {
       className: "locName"
     }, "Name: ", loc.name, " "), /*#__PURE__*/React.createElement("h3", {
       className: "locType"
     }, "Type: ", loc.type, " "), /*#__PURE__*/React.createElement("h3", {
-      className: "locCoords"
-    }, "Coordinates: (", loc.longitude, ", ", loc.latitude, ")"));
+      className: "locLocation"
+    }, "Location: ", loc.location), /*#__PURE__*/React.createElement("p", {
+      className: "locDescription"
+    }, "Description: ", loc.description));
   });
   return /*#__PURE__*/React.createElement("div", {
     className: "LocationList"
@@ -146,11 +148,14 @@ $(document).ready(function () {
 "use strict";
 
 var handleError = function handleError(message) {
-  $("#errorMessage").text(message); //  $("#screenMessage").animate({width:'toggle'}, 350);
+  $("#errorMessage").text(message);
+  $("#screenMessage").show();
 };
 
 var redirect = function redirect(response) {
-  //  $("#screenMessage").animate({width:'hide'}, 350);
+  $("#screenMessage").animate({
+    width: 'hide'
+  }, 350);
   window.location = response.redirect;
 };
 

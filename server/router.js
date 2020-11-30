@@ -1,4 +1,4 @@
-const controllers = require('./controllers');
+ const controllers = require('./controllers');
 const mid = require('./middleware');
 
 // connect as many middleware calls in the order you wanted the middleware to run

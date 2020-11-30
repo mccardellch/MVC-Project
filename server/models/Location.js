@@ -22,15 +22,15 @@ const LocationSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
+  },
+  location: {
+    type: String,
+    required: true,
+  },
+  about: {
+    type: String,
     trim: true,
-  },
-  longitude: {
-    type: Number,
-    required: true,
-  },
-  latitude: {
-    type: Number,
-    required: true,
+    required: true,    
   },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -46,8 +46,8 @@ const LocationSchema = new mongoose.Schema({
 LocationSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   type: doc.type,
-  longitude: doc.longitude,
-  latitude: doc.latitude,
+  location: doc.location,
+  about: doc.about,
 });
 
 // find locations created by the owner
@@ -56,7 +56,7 @@ LocationSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return LocationModel.find(search).select('name type longitude latitude').lean().exec(callback);
+  return LocationModel.find(search).select('name type location about').lean().exec(callback);
 };
 
 // find locations by the type
@@ -65,7 +65,17 @@ LocationSchema.statics.findByType = (type, callback) => {
     type,
   };
 
-  return LocationModel.find(search).select('name type longitude latitude').lean().exec(callback);
+  return LocationModel.find(search).select('name type location about').lean().exec(callback);
+};
+
+//return user created date
+LocationSchema.statics.createdDate = (type, callback) => {
+  const search = {
+    owner: convertId(ownerId),
+  };
+
+  console.log(search);
+  return search;
 };
 
 LocationModel = mongoose.model('Location', LocationSchema);

@@ -7,7 +7,7 @@ const {
 
 // add a new location
 const addLocation = (req, res) => {
-  if (!req.body.name || !req.body.type || !req.body.long || !req.body.lat) {
+  if (!req.body.name || !req.body.type || !req.body.location || !req.body.about) {
     return res.status(400).json({
       error: 'All fields are required.',
     });
@@ -16,8 +16,8 @@ const addLocation = (req, res) => {
   const locData = {
     name: req.body.name,
     type: req.body.type,
-    longitude: req.body.long,
-    latitude: req.body.lat,
+    location: req.body.location,
+    about: req.body.about,
     owner: req.session.account._id,
   };
 
@@ -70,7 +70,6 @@ const getMyLocations = (request, response) => {
 
   return Location.LocationModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
-      //      console.log(err);
       return res.status(400).json({
         error: 'An error occurred',
       });
@@ -86,8 +85,9 @@ const searchPage = (req, res) => res.render('app');
 
 const addPage = (req, res) => res.render('app');
 
+module.exports.add = addLocation;
 module.exports.myLocations = myLocations;
 module.exports.getMyLocations = getMyLocations;
 module.exports.searchPage = searchPage;
 module.exports.addPage = addPage;
-module.exports.add = addLocation;
+
