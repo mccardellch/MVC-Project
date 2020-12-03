@@ -60,12 +60,14 @@ AccountSchema.statics.findByUsername = (name, callback) => {
   return AccountModel.findOne(search, callback);
 };
 
+// create encrpytion
 AccountSchema.statics.generateHash = (password, callback) => {
   const salt = crypto.randomBytes(saltLength);
 
   crypto.pbkdf2(password, salt, iterations, keyLength, 'RSA-SHA512', (err, hash) => callback(salt, hash.toString('hex')));
 };
 
+// authenticate username and pass
 AccountSchema.statics.authenticate = (username, password, callback) => {
   AccountModel.findByUsername(username, (err, doc) => {
     if (err) {
@@ -86,6 +88,19 @@ AccountSchema.statics.authenticate = (username, password, callback) => {
   });
 };
 
+// return user created date
+// AccountSchema.statics.getCreatedDate = (username) => {
+//  const search = {
+//    createdDate,
+//  };
+//
+//  console.log(search);
+//  return search;
+// };
+//
+/// / return user created date
+
+AccountSchema.statics.getUsername = () => AccountSchema.username;
 AccountModel = mongoose.model('Account', AccountSchema);
 
 module.exports.AccountModel = AccountModel;

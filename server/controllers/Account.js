@@ -32,7 +32,7 @@ const login = (request, response) => {
 
     req.session.account = Account.AccountModel.toAPI(account);
 
-    return res.json({ redirect: '/search' });
+    return res.json({ redirect: '/add' });
   });
 };
 
@@ -81,8 +81,67 @@ const signup = (request, response) => {
   }); // end return generateHash
 }; // end signup
 
+// const changePassword = (request, response) => {
+//  const req = request;
+//  const res = response;
+//
+//  // cast to strings to cover up some security flaws
+//  req.body.username = `${req.body.username}`;
+//  req.body.pass = `${req.body.pass}`;
+//  req.body.pass2 = `${req.body.pass2}`;
+//
+//  if (!req.body.username || !req.body.pass || !req.body.pass2) {
+//    return res.status(400).json({ error: 'All fields are required.' });
+//  }
+//
+//  if (req.body.pass !== req.body.pass2) {
+//    return res.status(400).json({ error: 'Passwords do not match' });
+//  }
+//
+//  return Account.AccountModel.generateHash(req.body.pass, (salt, hash) => {
+//    const accountData = {
+//      username: req.body.username,
+//      salt,
+//      password: hash,
+//    };
+//
+//    const newAccount = new Account.AccountModel(accountData);
+// }; // end signup
+//
+//    const savePromise = newAccount.save();
+//
+//    savePromise.then(() => {
+//      req.session.account = Account.AccountModel.toAPI(newAccount);
+//      return res.json({ redirect: '/add' });
+//    });
+//
+//    savePromise.catch((err) => {
+//      //      console.log(err);
+//
+//      if (err.code === 11000) {
+//        return res.status(400).json({ error: 'Username already in use.' });
+//      }
+//
+//      return res.status(400).json({ error: 'An error occured.' });
+//    }); // end promise cathc
+//  }); // end return generateHash
+
 const settingsPage = (req, res) => {
-  res.render('settings');
+  res.render('settings', { csrfToken: req.csrfToken() });
+};
+
+const getUserInfo = (request, response) => {
+//  const req = request;
+  const res = response;
+
+  // force cast to strings to cover some security flaws
+  //  const username = `${req.body.username}`;
+
+  const accData = {
+    accData: Account.AccountModel.getUsername(),
+  };
+  //  console.log(accData);
+  res.json(accData);
 };
 
 const getToken = (request, response) => {
@@ -101,4 +160,5 @@ module.exports.logout = logout;
 module.exports.login = login;
 module.exports.signup = signup;
 module.exports.settings = settingsPage;
+module.exports.info = getUserInfo;
 module.exports.getToken = getToken;

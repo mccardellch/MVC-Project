@@ -30,7 +30,7 @@ const LocationSchema = new mongoose.Schema({
   about: {
     type: String,
     trim: true,
-    required: true,    
+    required: true,
   },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -66,16 +66,6 @@ LocationSchema.statics.findByType = (type, callback) => {
   };
 
   return LocationModel.find(search).select('name type location about').lean().exec(callback);
-};
-
-//return user created date
-LocationSchema.statics.createdDate = (type, callback) => {
-  const search = {
-    owner: convertId(ownerId),
-  };
-
-  console.log(search);
-  return search;
 };
 
 LocationModel = mongoose.model('Location', LocationSchema);

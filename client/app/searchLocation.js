@@ -1,34 +1,24 @@
-const handleLocation = (e) => {
+const handleSearch = (e) => {
   e.preventDefault();
-  
-//  $("#screenMessage").animate({width:'hide'}, 350);
-  
-  if($("#locName").val() == '' || $("#locType").val() == '' || $("#locLocation").val() == '' || $("#locAbout").val() == '') {
-    
-    handleError("All fields are required");
-    return false;
-  }
-  
-  sendAjax('POST', $("#addForm").attr("action"), $("#addForm").serialize(), function() {
+   
+  sendAjax('POST', $("#searchForm").attr("action"), $("#searchForm").serialize(), function() {
     loadLocsFromServer();
   });
   
   return false;
 };
 
-const AddForm = (props) => {
+const SearchForm = (props) => {
   return (
     
-  <form id="addForm" 
-    name="addForm" 
-    onSubmit={handleLocation} 
-    action="/add" 
+  <form id="searchForm" 
+    name="searchForm" 
+    onSubmit={handleSearch} 
+    action="/search" 
     method="POST" 
-    className="addForm"
+    className="searchForm"
     >
-    <h3>Add A Skate Location</h3>  
-
-    <label htmlFor="name">Name: </label><input id="locName" type="text" name="name" placeholder="Location Name"/>
+    <h3>Filter Skate Locations</h3>  
       
     <label htmlFor="type">Type: </label>
     <select id="locType" name="type" >
@@ -36,15 +26,9 @@ const AddForm = (props) => {
       <option value='park'>Skate Park</option>
       <option value='spot'>Skate Spot</option>
     </select><br />
-
-    <label htmlFor="location">Location: </label>      
-    <input type='text' id='locLocation' name='location' required />
-      
-    <label htmlFor="About">about: </label>      
-    <input type='text' id='locAbout' name='about' required />
       
     <input type="hidden" name="_csrf" value={props.csrf} /> <br/><br/>
-    <input className="makeLocSubmit" type="submit" value="Make Location" />   
+    <input className="searchLocSubmit" type="submit" value="Search" />  
   </form>
   );
 };
@@ -53,7 +37,7 @@ const LocationList = function(props) {
   if (props.locations.length === 0){
     return (
       <div className="LocationList">
-        <h3 className="emptyLocation">No Locations yet</h3>
+        <h3 className="emptyLocation">No Locations found</h3>
       </div>
     );
   }
@@ -94,7 +78,7 @@ const LocationList = function(props) {
 };
 
 const loadLocsFromServer = () => {
-  sendAjax('GET', '/getMyLocations', null, (data) => {
+  sendAjax('GET', '/getLocationsType', null, (data) => {
     ReactDOM.render(
       <LocationList locations={data.locations} />, document.querySelector("#locations")
     );

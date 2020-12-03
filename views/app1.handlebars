@@ -10,16 +10,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
   <link rel="shortcut icon" href="/assets/img/board.png" />
   <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+
+  <!--    FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fugaz+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div id='header'>
     <div id='header-text'>
-<!--            <h1>Skate Spots</h1>-->
-        <h1>SKATE SPOTS</h1>
-        <h3>SEARCH &#8226; LOCATE &#8226; SKATE</h3>
+      <!--            <h1>Skate Spots</h1>-->
+      <h1>SKATE SPOTS</h1>
+      <h3>SEARCH &#8226; LOCATE &#8226; SKATE</h3>
     </div>
   </div>
+
   <nav><a href="/login"><img id="logo" src="/assets/img/board.jpg" alt="board logo" /></a>
     <div class="navlink"><a href="/search">Search</a></div>
     <div class="navlink"><a href="/add">Add</a></div>
@@ -27,26 +32,36 @@
     <div class="navlink"><a href="/logout">Log out</a></div>
   </nav>
 
-  <div id='taskbar'>
-    <p>Account Details</p>
-    <p>Security</p>
-    <p>Communication Preferences</p>
-    <p>Personalization</p>
-    <p>Connected Apps</p>
-  </div>
-  
-  <div id='settings'>
-    <h1 id='accounth1'>My Account</h1>
-    <div id='details'>
-      <img src="/assets/img/skater.jpg" alt="skater profile picture" id="profilePic"/>
-      <div id='accInfo'></div>
-    </div>
+  <div id='content'>
+    <div id='controls'></div>
+    <div id='locations'></div>
   </div>
   
   <div id="screenMessage">
     <h3><span id="errorMessage"></span></h3>
   </div>
   <script src="/assets/bundle.js"></script>
+
+  <div class='ad'>
+    <img class='adImg' src="/assets/img/thrasher sub1.jpg" alt="thrasher subscription" />
+    <h4 class='adH4'><a href="https://shop.thrashermagazine.com/subscriptions/1-year-international-subscription-free-t-shirt.html">Subscribe to Thrasher Now!</a></h4>
+  </div>
+  
+  <footer>
+    <div id='info' class='footer'>
+      <h4>ABOUT</h4>
+      <p>Harry McCardell</p>
+      <p>'Skate Spots'</p>
+      <p>IGME 430</p>
+    </div>
+    <div id='contact' class='footer'>
+      <h4>CONTACT</h4>
+      <p>hhm7826@rit.edu</p>
+      <p><a href='https://www.linkedin.com/in/harry-mccardell/'>linkedin</a></p>
+      <p><a href='https://people.rit.edu/hhm7826/230/portfolio/'>portfolio</a></p>
+    </div>
+  </footer>
+
 </body>
 
 </html>

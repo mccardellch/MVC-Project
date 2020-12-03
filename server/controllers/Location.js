@@ -81,13 +81,30 @@ const getMyLocations = (request, response) => {
   });
 };
 
-const searchPage = (req, res) => res.render('app');
+const getLocationsType = (request, response) => {
+  const req = request;
+  const res = response;
+
+  return Location.LocationModel.findByType(req.body.type, (err, docs) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'An error occurred',
+      });
+    }
+
+    return res.json({
+      locations: docs,
+    });
+  });
+};
+
+const searchPage = (req, res) => res.render('app1');
 
 const addPage = (req, res) => res.render('app');
 
 module.exports.add = addLocation;
 module.exports.myLocations = myLocations;
 module.exports.getMyLocations = getMyLocations;
+module.exports.getLocationsType = getLocationsType;
 module.exports.searchPage = searchPage;
 module.exports.addPage = addPage;
-

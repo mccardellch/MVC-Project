@@ -267,6 +267,7 @@ h3.locType {
 #profilePic { 
   border-radius: 50%;
   border: 3px solid black;
+  height: 200px;
 }
 
 #taskbar {
@@ -347,6 +348,7 @@ body {
 }
 
 #topnav{
+    font-family: 'Oswald', cursive;
     width: 100%;
     background-color:black;
     color: white;
@@ -476,6 +478,37 @@ footer p{
     text-align: left;
     padding: 0;
     margin: 0;
+}
+
+.ad {
+  width: 500px;
+  margin: 0 auto;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  text-align: center;
+}
+
+.adImg {
+  height: 200px;
+  padding: 0;
+  margin: 0;
+  max-width: 300px;
+}
+
+.ad h4 {
+  padding: 0;
+  margin: 0;
+}
+
+.ad a{
+  text-decoration: none;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.ad a:hover {
+  color: #2767C1;
 }
 
 h6{color: red; margin-top: 0; margin-bottom:15px; }
